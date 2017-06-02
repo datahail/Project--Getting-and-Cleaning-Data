@@ -52,8 +52,10 @@ run_analysis <- function(){
         xysTrainData <- cbind(subjTrain, yTrain, xTrain)
 
         TestTrainData <- rbind(xysTestData, xysTrainData)
-        print(dim(TestTrainData))
+       # print(dim(TestTrainData))
         
-        aggregate(.~ Activity + Subject, TestTrainData, mean, na.action=na.pass, na.rm=TRUE)
+        tidyData <- aggregate(.~ Activity + Subject, TestTrainData, mean, na.action=na.pass, na.rm=TRUE)
+        
+        write.table(tidyData, "tidyData.txt", sep="\t", row.names=FALSE)
         
 }
